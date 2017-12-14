@@ -137,8 +137,8 @@ Puppet::Type.type(:service).provide :smf, :parent => :base do
       states = service_states
       state = states[1] == "-" ? states[0] : states[1]
     rescue Puppet::ExecutionFailure
-      debug "Could not get status on service #{self.name} #{$!}"
-      return :absent
+      info "Could not get status on service #{self.name}"
+      return :stopped
     end
 
     case state
